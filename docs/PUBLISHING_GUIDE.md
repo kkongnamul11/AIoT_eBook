@@ -15,12 +15,14 @@
 ### 현재 사용 중: VS Code (Cursor)
 
 **장점**:
+
 - ✅ 무료, 강력한 편집 기능
 - ✅ Markdown Preview 내장
 - ✅ Git 통합
 - ✅ 확장 기능 풍부
 
 **추천 확장**:
+
 ```bash
 # VS Code Extensions
 - Markdown All in One
@@ -32,6 +34,7 @@
 ### 대안 1: Typora (유료)
 
 **특징**:
+
 - WYSIWYG (보는 대로 출력)
 - 깔끔한 UI
 - 실시간 렌더링
@@ -40,6 +43,7 @@
 **가격**: $14.99 (일회성)
 
 **설치**:
+
 ```bash
 brew install --cask typora
 ```
@@ -47,12 +51,14 @@ brew install --cask typora
 ### 대안 2: Obsidian (무료)
 
 **특징**:
+
 - 노트 링크 관리
 - 그래프 뷰
 - 플러그인 시스템
 - 로컬 우선
 
 **설치**:
+
 ```bash
 brew install --cask obsidian
 ```
@@ -60,12 +66,14 @@ brew install --cask obsidian
 ### 대안 3: MacDown (무료, macOS)
 
 **특징**:
+
 - 간단한 인터페이스
 - 실시간 프리뷰
 - GitHub Flavored Markdown
 - 경량
 
 **설치**:
+
 ```bash
 brew install --cask macdown
 ```
@@ -389,6 +397,7 @@ docsify serve docs
 **목표**: PDF 파일로 보관
 
 **방법**:
+
 ```bash
 # Pandoc으로 PDF 생성
 pandoc chapters/*/*.md \
@@ -403,6 +412,7 @@ pandoc chapters/*/*.md \
 **목표**: 웹사이트로 배포
 
 **방법**: GitBook + GitHub Pages
+
 ```bash
 1. GitBook으로 웹사이트 생성
 2. GitHub Pages에 배포
@@ -414,6 +424,7 @@ pandoc chapters/*/*.md \
 **목표**: 전문적인 PDF + ePub
 
 **방법**: Pandoc + 전문 디자인
+
 ```bash
 1. Pandoc으로 ePub 생성
 2. Calibre로 편집 및 MOBI 변환
@@ -638,6 +649,7 @@ mdbook build -d docs
 ### 빠르게 시작하려면
 
 **Pandoc + PDF**:
+
 ```bash
 brew install pandoc basictex
 ./build.sh
@@ -646,6 +658,7 @@ brew install pandoc basictex
 ### 온라인으로 공유하려면
 
 **Docsify + GitHub Pages**:
+
 - 빌드 불필요
 - 실시간 업데이트
 - 검색 기능
@@ -653,6 +666,7 @@ brew install pandoc basictex
 ### 전문적으로 출판하려면
 
 **Pandoc + 전문 템플릿**:
+
 - Eisvogel 템플릿
 - 커스텀 CSS
 - 상업용 폰트
@@ -669,4 +683,3 @@ brew install pandoc basictex
 ---
 
 **🎉 이제 Markdown 파일을 원하는 형태의 전자책으로 변환할 수 있습니다!**
-

@@ -53,6 +53,7 @@ http://localhost:3000
 ```
 
 **예상 결과**:
+
 - ✅ 커버 페이지 표시
 - ✅ 사이드바에 전체 챕터 목록
 - ✅ 검색 기능 작동
@@ -103,6 +104,7 @@ git push -u origin main
 ### Step 4: 배포 완료 확인
 
 **1-2분 후**:
+
 ```
 https://YOUR_USERNAME.github.io/eBook_AIoT/
 ```
@@ -110,6 +112,7 @@ https://YOUR_USERNAME.github.io/eBook_AIoT/
 예: `https://makeitnow-ai.github.io/eBook_AIoT/`
 
 **체크리스트**:
+
 - ✅ 커버 페이지가 먼저 보임
 - ✅ 사이드바에 모든 챕터
 - ✅ 검색 작동
@@ -156,6 +159,7 @@ https://YOUR_USERNAME.github.io/eBook_AIoT/
 **원인**: GitHub Pages 설정 미완료
 
 **해결**:
+
 - Settings → Pages에서 `/docs` 폴더 선택 확인
 - `.nojekyll` 파일 존재 확인
 
@@ -164,6 +168,7 @@ https://YOUR_USERNAME.github.io/eBook_AIoT/
 **원인**: 상대 경로 문제
 
 **해결**:
+
 ```bash
 # _sidebar.md에서 경로 확인
 # 올바른 예: ../chapters/part1/ch01_intro.md
@@ -174,6 +179,7 @@ https://YOUR_USERNAME.github.io/eBook_AIoT/
 **원인**: 파일 경로 오류
 
 **해결**:
+
 ```bash
 # 파일 존재 확인
 ls -la chapters/part1/
@@ -201,6 +207,7 @@ git push
 ```
 
 **즉시 확인**:
+
 - 로컬: `docsify serve docs` (즉시 반영)
 - GitHub Pages: 1-2분 대기 필요
 
@@ -214,14 +221,23 @@ git push
 
 ```html
 <!-- 현재: vue 테마 -->
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+<link
+  rel="stylesheet"
+  href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css"
+/>
 
 <!-- 다른 테마 -->
 <!-- Dark 테마 -->
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/dark.css">
+<link
+  rel="stylesheet"
+  href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/dark.css"
+/>
 
 <!-- Buble 테마 -->
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/buble.css">
+<link
+  rel="stylesheet"
+  href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/buble.css"
+/>
 ```
 
 ### 색상 변경
@@ -230,8 +246,8 @@ git push
 
 ```css
 :root {
-  --theme-color: #667eea;        /* 메인 색상 */
-  --theme-color-dark: #764ba2;   /* 다크 색상 */
+  --theme-color: #667eea; /* 메인 색상 */
+  --theme-color-dark: #764ba2; /* 다크 색상 */
 }
 ```
 
@@ -241,9 +257,11 @@ git push
 
 ```markdown
 <!-- 현재: 아이콘 -->
+
 ![logo](https://img.icons8.com/fluency/96/000000/artificial-intelligence.png)
 
 <!-- 커스텀 로고 -->
+
 ![logo](assets/logo.png)
 ```
 
@@ -258,9 +276,9 @@ git push
 ```javascript
 window.$docsify = {
   // ... 기존 설정 ...
-  
-  ga: 'UA-XXXXXXXX-X'  // Google Analytics ID
-}
+
+  ga: "UA-XXXXXXXX-X", // Google Analytics ID
+};
 ```
 
 ### 방문자 카운터
@@ -284,7 +302,7 @@ name: Deploy Docs
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   deploy:
@@ -299,6 +317,7 @@ jobs:
 ```
 
 **장점**:
+
 - 푸시하면 자동 배포
 - 빌드 상태 확인
 - 롤백 가능
@@ -344,12 +363,14 @@ git push
 ## ✅ 최종 체크리스트
 
 배포 전:
+
 - [ ] 로컬에서 `docsify serve docs` 테스트
 - [ ] 모든 링크 작동 확인
 - [ ] 이미지 경로 확인
 - [ ] 모바일 반응형 테스트
 
 배포 후:
+
 - [ ] GitHub Pages URL 접속
 - [ ] 전체 챕터 확인
 - [ ] 검색 기능 테스트
@@ -362,12 +383,14 @@ git push
 이제 전 세계 누구나 접속할 수 있는 온라인 문서 사이트가 완성되었습니다!
 
 **다음 단계**:
+
 1. 로컬 테스트: `docsify serve docs`
 2. GitHub Pages 배포
 3. URL 공유
 4. 피드백 받고 개선
 
 **URL 예시**:
+
 ```
 https://makeitnow-ai.github.io/eBook_AIoT/
 ```
@@ -379,4 +402,3 @@ https://makeitnow-ai.github.io/eBook_AIoT/
 ```bash
 docsify serve docs
 ```
-
