@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>헥사보드 센서 모니터</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#667eea',
+                        secondary: '#764ba2',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-primary to-secondary min-h-screen p-6">
+    <div class="max-w-4xl mx-auto">
+        <!-- 헤더 -->
+        <div class="text-center text-white mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                🎛️ 헥사보드 센서 모니터
+            </h1>
+            <div id="status" class="inline-block px-4 py-2 rounded-full text-sm font-bold bg-red-500 text-white">
+                연결 대기 중...
+            </div>
+        </div>
+        
+        <!-- 센서 데이터 카드 -->
+        <div class="bg-white rounded-2xl shadow-2xl p-8 mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">📊 실시간 센서 데이터</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 온도 -->
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 text-center">
+                    <div class="text-5xl mb-3">🌡️</div>
+                    <div class="text-sm text-gray-600 mb-2">온도</div>
+                    <div class="text-3xl font-bold text-gray-800">
+                        <span id="temp">--</span><span class="text-lg text-gray-500">°C</span>
+                    </div>
+                </div>
+                
+                <!-- 습도 -->
+                <div class="bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-xl p-6 text-center">
+                    <div class="text-5xl mb-3">💧</div>
+                    <div class="text-sm text-gray-600 mb-2">습도</div>
+                    <div class="text-3xl font-bold text-gray-800">
+                        <span id="humid">--</span><span class="text-lg text-gray-500">%</span>
+                    </div>
+                </div>
+                
+                <!-- 조도 -->
+                <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl p-6 text-center">
+                    <div class="text-5xl mb-3">💡</div>
+                    <div class="text-sm text-gray-600 mb-2">조도</div>
+                    <div class="text-3xl font-bold text-gray-800" id="light">--</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 로그 카드 -->
+        <div class="bg-white rounded-2xl shadow-2xl p-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">📝 데이터 로그</h2>
+            <div id="log" class="bg-gray-50 rounded-lg p-4 max-h-64 overflow-y-auto font-mono text-sm space-y-2">
+                <div class="border-b border-gray-200 pb-2">
+                    <span class="text-gray-400">--:--:--</span>
+                    <span class="ml-3">연결 대기 중...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MQTT.js -->
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    
+    <script>
+        // MQTT 설정 (본인의 정보로 변경)
+        const MQTT_BROKER = "wss://abc123.s1.eu.hivemq.cloud:8884/mqtt";
+        const MQTT_USER = "hexaboard";
+        const MQTT_PASSWORD = "your_password";
+        const TOPIC_SENSOR = "hexaboard/+/sensor/data";
+        
+        // MQTT 클라이언트
+        const client = mqtt.connect(MQTT_BROKER, {
+            username: MQTT_USER,
+            password: MQTT_PASSWORD,
+            clientId: 'web_monitor_' + Math.random().toString(16).substr(2, 8)
+        });
+        
+        // 연결 성공
+        client.on('connect', function() {
+            console.log('✅ MQTT 연결 성공!');
+            updateStatus(true);
+            addLog('MQTT Broker에 연결되었습니다.');
+            
+            client.subscribe(TOPIC_SENSOR, function(err) {
+                if (!err) {
+                    addLog(`구독 시작: ${TOPIC_SENSOR}`);
+                }
+            });
+        });
+        
+        // 메시지 수신
+        client.on('message', function(topic, message) {
+            try {
+                const data = JSON.parse(message.toString());
+                updateSensorData(data);
+                addLog(`센서 데이터: ${data.temperature}°C, ${data.humidity}%`);
+            } catch (e) {
+                console.error('파싱 오류:', e);
+            }
+        });
+        
+        // 연결 끊김
+        client.on('close', function() {
+            console.log('❌ MQTT 연결 끊김');
+            updateStatus(false);
+            addLog('연결이 끊어졌습니다.');
+        });
+        
+        // UI 업데이트
+        function updateStatus(connected) {
+            const statusEl = document.getElementById('status');
+            if (connected) {
+                statusEl.textContent = '연결됨';
+                statusEl.className = 'inline-block px-4 py-2 rounded-full text-sm font-bold bg-green-400 text-green-900';
+            } else {
+                statusEl.textContent = '연결 끊김';
+                statusEl.className = 'inline-block px-4 py-2 rounded-full text-sm font-bold bg-red-500 text-white';
+            }
+        }
+        
+        function updateSensorData(data) {
+            document.getElementById('temp').textContent = data.temperature;
+            document.getElementById('humid').textContent = data.humidity;
+            document.getElementById('light').textContent = data.light || '--';
+        }
+        
+        function addLog(message) {
+            const logEl = document.getElementById('log');
+            const time = new Date().toLocaleTimeString('ko-KR');
+            
+            const logItem = document.createElement('div');
+            logItem.className = 'border-b border-gray-200 pb-2';
+            logItem.innerHTML = `<span class="text-gray-400">${time}</span><span class="ml-3">${message}</span>`;
+            
+            logEl.insertBefore(logItem, logEl.firstChild);
+            
+            while (logEl.children.length > 20) {
+                logEl.removeChild(logEl.lastChild);
+            }
+        }
+    </script>
+</body>
+</html>
+

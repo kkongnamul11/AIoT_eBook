@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>헥사보드 AI 센서랩 - AIoT 실습 교재</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="OpenAI와 함께하는 스마트 환경 실험실">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  
+  <!-- 테마 -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  
+  <!-- 커스텀 스타일 -->
+  <style>
+    :root {
+      --theme-color: #667eea;
+      --theme-color-dark: #764ba2;
+    }
+    
+    .app-name-link img {
+      width: 40px;
+      margin-right: 10px;
+    }
+    
+    .markdown-section code {
+      background-color: #f8f8f8;
+      color: #e83e8c;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+    
+    .markdown-section pre > code {
+      color: #333;
+    }
+    
+    .sidebar-nav li strong {
+      color: var(--theme-color);
+      font-size: 1.1em;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">로딩 중...</div>
+  
+  <script>
+    window.$docsify = {
+      name: '🎛️ 헥사보드 AI 센서랩',
+      repo: 'https://github.com/makeitnow-ai/eBook_AIoT',
+      
+      // 사이드바
+      loadSidebar: true,
+      subMaxLevel: 3,
+      auto2top: true,
+      
+      // 홈페이지
+      homepage: 'README.md',
+      
+      // 검색
+      search: {
+        maxAge: 86400000,
+        paths: 'auto',
+        placeholder: '검색...',
+        noData: '결과 없음',
+        depth: 3
+      },
+      
+      // 복사 버튼
+      copyCode: {
+        buttonText: '복사',
+        errorText: '오류',
+        successText: '완료!'
+      },
+      
+      // 페이지네이션
+      pagination: {
+        previousText: '이전',
+        nextText: '다음',
+        crossChapter: true
+      },
+      
+      // 커버 페이지
+      coverpage: true,
+      
+      // 편집 링크
+      editOnGithubUrl: 'https://github.com/makeitnow-ai/eBook_AIoT/tree/main/',
+      
+      // 플러그인
+      plugins: [
+        function(hook, vm) {
+          // 푸터 추가
+          hook.beforeEach(function(html) {
+            return html;
+          });
+          
+          hook.afterEach(function(html, next) {
+            var footer = [
+              '<hr/>',
+              '<footer>',
+              '<span>Made with ❤️ by MakeItNow | ',
+              '<a href="https://github.com/makeitnow-ai/eBook_AIoT" target="_blank">GitHub</a></span>',
+              '</footer>'
+            ].join('');
+            
+            next(html + footer);
+          });
+        }
+      ]
+    }
+  </script>
+  
+  <!-- Docsify 코어 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  
+  <!-- 검색 플러그인 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  
+  <!-- 복사 버튼 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code@2"></script>
+  
+  <!-- 페이지네이션 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-pagination@2/dist/docsify-pagination.min.js"></script>
+  
+  <!-- 이모지 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
+  
+  <!-- 외부 스크립트 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/external-script.min.js"></script>
+  
+  <!-- 문법 하이라이팅 -->
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-javascript.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-css.min.js"></script>
+  
+  <!-- Zoom 이미지 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+</body>
+</html>
+
