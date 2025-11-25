@@ -1,0 +1,48 @@
+# 빌드 출력물
+output/
+*.pdf
+*.epub
+*.mobi
+*.html
+
+# GitBook
+_book/
+node_modules/
+
+# mdBook
+book/
+
+# 임시 파일
+*.tmp
+*.temp
+.DS_Store
+
+# 환경 변수
+.env
+config/.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 로그
+*.log
+
+# OS
+Thumbs.db
+
