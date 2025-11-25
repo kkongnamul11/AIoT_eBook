@@ -3,7 +3,7 @@ output/
 *.pdf
 *.epub
 *.mobi
-*.html
+output/*.html
 
 # GitBook
 _book/
